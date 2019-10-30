@@ -12,8 +12,6 @@ using System.Xml;
 
 namespace WS_SENAME
 {
-   
-
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
