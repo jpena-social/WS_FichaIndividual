@@ -19,9 +19,6 @@ namespace WS_SENAME
     [ToolboxItem(false)]
     public class Service : WebService
     {
-        
-
-
         [WebMethod(Description = "Historial de los niños, niñas ingresados a los centros o proyectos de Protección, fechas, causas, tribunales.")]
         public XmlDocument HistorialNino_LRPA_Proteccion_xml(int RUN, string DV)
         {
@@ -1587,8 +1584,6 @@ namespace WS_SENAME
             return xmlDocument;
         }
 
-        
-
         private XmlDocument GetCatastroJusticiaJuvenil(DataTable dc)
         {
             XmlDocument xmlDocument = new XmlDocument();
@@ -1746,7 +1741,5 @@ namespace WS_SENAME
         public XmlDataDocument DocXML { get; set; }
 
         public object DsGetResultado { get; set; }
-      
-
     }
 }
