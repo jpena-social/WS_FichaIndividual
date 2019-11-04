@@ -20,7 +20,7 @@ namespace WS_SENAME
         [WebMethod(Description = "Historial de los niños, niñas ingresados a los centros o proyectos de Protección, fechas, causas, tribunales.")]
         public XmlDocument HistorialNino_LRPA_Proteccion_xml(int RUN, string DV)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["connSQL"].ConnectionString;
+            var connectionString = ConfigurationManager.ConnectionStrings["Conexiones"].ConnectionString;
             var objconn = new SqlConnection {ConnectionString = connectionString};
             var dataNna = this.GetDataNNA(RUN, DV);
             var CodNino = 0;
@@ -49,7 +49,7 @@ namespace WS_SENAME
         [WebMethod(Description = "Ficha Individual TEST. Información con relación a la situación de los niño niña o adolescente asociada a su estadía en un Centro Residencial o Familia de Acogida.")]
         public XmlDocument FichaIndividual_xml_TEST(int RUN, string DV)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["connSQL"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Conexiones"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = connectionString;
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(string.Empty + "SELECT top 1 Nombres, Apellido_Paterno, Apellido_Materno, Rut, dbo.f_rectificacion_cambia_fecha_str(FechaNacimiento) as FechaNacimiento, DATEDIFF(yyyy, FechaNacimiento, GETDATE()) as Edad, Sexo, CodNino, CodNacionalidad, (Select Descripcion from parNacionalidades pn where pn.CodNacionalidad = n.CodNacionalidad) as Nacionalidad FROM Ninos n " + "WHERE Rut = '" + RUN.ToString().Trim() + "-" + DV.Trim() + "' " + "order by CodNino desc", sqlConnection);
@@ -65,7 +65,7 @@ namespace WS_SENAME
         [WebMethod(Description = "Información del Proyecto")]
         public XmlDocument InformacionProyecto_xml(int CodProyecto)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["connSQL"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["Conexiones"].ConnectionString;
             SqlConnection sqlConn = new SqlConnection();
             sqlConn.ConnectionString = connectionString;
             XmlDocument xmlDocument = new XmlDocument();
