@@ -531,6 +531,9 @@ namespace WS_SENAME
             xmlTextWriter1.WriteElementString("FechaNacimiento", dtNino.Rows[0]["FechaNacimiento"].ToString());
             xmlTextWriter1.WriteElementString("Edad", dtNino.Rows[0]["Edad"].ToString());
             xmlTextWriter1.WriteElementString("Sexo", dtNino.Rows[0]["Sexo"].ToString());
+            xmlTextWriter1.WriteElementString("CodNino", dtNino.Rows[0]["CodNino"].ToString());
+            xmlTextWriter1.WriteElementString("CodNacionalidad", dtNino.Rows[0]["CodNacionalidad"].ToString());
+            xmlTextWriter1.WriteElementString("FechaUltimaActualizacion", dtNino.Rows[0]["FechaUltimaActualizacion"].ToString());
             DataTable dataTable1 = this.CargaDatosIngreso(dtNino.Rows[0]["CodNino"].ToString());
             if (dataTable1.Rows.Count == 0)
             {
