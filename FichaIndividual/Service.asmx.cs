@@ -103,7 +103,7 @@ namespace WS_SENAME
 
             using (var con = new SqlConnection(connectionString))
             {
-                var cmd = new SqlCommand("WebServices_GetFichaIndividual",con)
+                var cmd = new SqlCommand("WebServices_GetFichaIndividual", con)
                 {
                     CommandTimeout = 10000000,
                     CommandType = CommandType.StoredProcedure
@@ -112,9 +112,7 @@ namespace WS_SENAME
                 cmd.Parameters.Add("@Rut", SqlDbType.VarChar).Value = rut;
                 new SqlDataAdapter(cmd).Fill(ds);
                 return GetDatosFichaIndividual(ds);
-
-            }
-         
+            }         
         }
 
         private XmlDocument GetDatosFichaIndividual(DataSet ds)
@@ -258,11 +256,22 @@ namespace WS_SENAME
                 if (ds.Tables[9].Rows.Count > 0)
                 {
                     xmlTextWriter.WriteStartElement("Visitas");
-                    xmlTextWriter.WriteElementString("visitas", ds.Tables[9].Rows[0]["RecibeVisitas"].ToString());
-                    xmlTextWriter.WriteElementString("visitantes", ds.Tables[9].Rows[0]["Madre"].ToString());
-                    xmlTextWriter.WriteElementString("periocidad", ds.Tables[9].Rows[0]["Periodicidad"].ToString());
-                    xmlTextWriter.WriteElementString("salidas", ds.Tables[9].Rows[0]["SalidasPernoctacion"].ToString());
-                    xmlTextWriter.WriteElementString("acompanantes", ds.Tables[9].Rows[0]["Acompañante"].ToString());
+                    //xmlTextWriter.WriteElementString("visitas", ds.Tables[9].Rows[0]["RecibeVisitas"].ToString());
+                    //xmlTextWriter.WriteElementString("visitantes", ds.Tables[9].Rows[0]["Madre"].ToString());
+                    //xmlTextWriter.WriteElementString("periocidad", ds.Tables[9].Rows[0]["Periodicidad"].ToString());
+                    //xmlTextWriter.WriteElementString("salidas", ds.Tables[9].Rows[0]["SalidasPernoctacion"].ToString());
+                    //xmlTextWriter.WriteElementString("acompanantes", ds.Tables[9].Rows[0]["Acompañante"].ToString());
+                    xmlTextWriter.WriteElementString("PadreMadreTutor",ds.Tables[9].Rows[0]["PadreMadreTutor"].ToString());
+                    xmlTextWriter.WriteElementString("Otro", ds.Tables[9].Rows[0]["Otro"].ToString());
+                    xmlTextWriter.WriteElementString("Padre", ds.Tables[9].Rows[0]["Padre"].ToString());
+                    xmlTextWriter.WriteElementString("OtroMasculino", ds.Tables[9].Rows[0]["OtroMasculino"].ToString());
+                    xmlTextWriter.WriteElementString("Hermana", ds.Tables[9].Rows[0]["Hermana"].ToString());
+                    xmlTextWriter.WriteElementString("Hermano", ds.Tables[9].Rows[0]["Hermano"].ToString());
+                    xmlTextWriter.WriteElementString("SinVisitas", ds.Tables[9].Rows[0]["SinVisitas"].ToString());
+                    xmlTextWriter.WriteElementString("RecibeVisitas", ds.Tables[9].Rows[0]["RecibeVisitas"].ToString());
+                    xmlTextWriter.WriteElementString("SalidasPernoctacion", ds.Tables[9].Rows[0]["SalidasPernoctacion"].ToString());
+                    xmlTextWriter.WriteElementString("OtroExtensaMasculino", ds.Tables[9].Rows[0]["OtroExtensaMasculino"].ToString());
+                    xmlTextWriter.WriteElementString("OtroExtensaFemenino", ds.Tables[9].Rows[0]["OtroExtensaFemenino"].ToString());
                     xmlTextWriter.WriteEndElement();
                 }
                 if (ds.Tables[10].Rows.Count > 0)
@@ -531,9 +540,6 @@ namespace WS_SENAME
             xmlTextWriter1.WriteElementString("FechaNacimiento", dtNino.Rows[0]["FechaNacimiento"].ToString());
             xmlTextWriter1.WriteElementString("Edad", dtNino.Rows[0]["Edad"].ToString());
             xmlTextWriter1.WriteElementString("Sexo", dtNino.Rows[0]["Sexo"].ToString());
-            xmlTextWriter1.WriteElementString("CodNino", dtNino.Rows[0]["CodNino"].ToString());
-            xmlTextWriter1.WriteElementString("CodNacionalidad", dtNino.Rows[0]["CodNacionalidad"].ToString());
-            xmlTextWriter1.WriteElementString("FechaUltimaActualizacion", dtNino.Rows[0]["FechaUltimaActualizacion"].ToString());
             DataTable dataTable1 = this.CargaDatosIngreso(dtNino.Rows[0]["CodNino"].ToString());
             if (dataTable1.Rows.Count == 0)
             {
@@ -864,7 +870,7 @@ namespace WS_SENAME
             File.Delete(str2);
             return xmlDocument;
         }
-
+        
         private DataTable CargaParametricaNacionalidad()
         {
             DataTable dataTable = new DataTable();
@@ -1740,7 +1746,6 @@ namespace WS_SENAME
         }
 
         public XmlDataDocument DocXML { get; set; }
-
         public object DsGetResultado { get; set; }
     }
 }
