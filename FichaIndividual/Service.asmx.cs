@@ -103,7 +103,7 @@ namespace WS_SENAME
 
             using (var con = new SqlConnection(connectionString))
             {
-                var cmd = new SqlCommand("WebServices_GetFichaIndividual", con)
+                var cmd = new SqlCommand("WebServices_GetFichaIndividual_RM", con)
                 {
                     CommandTimeout = 10000000,
                     CommandType = CommandType.StoredProcedure
@@ -218,6 +218,8 @@ namespace WS_SENAME
                     xmlTextWriter.WriteElementString("NUM_Niv_Dif", ds.Tables[6].Rows[0]["NivelDiferencial"].ToString());
                     xmlTextWriter.WriteElementString("INASIS_Op", ds.Tables[6].Rows[0]["INASIS_Op"].ToString());
                     xmlTextWriter.WriteElementString("OBSERV_Escolar", ds.Tables[6].Rows[0]["Observaciones"].ToString());
+
+
                     xmlTextWriter.WriteEndElement();
                 }
                 if (ds.Tables[7].Rows.Count > 0)
@@ -256,12 +258,7 @@ namespace WS_SENAME
                 if (ds.Tables[9].Rows.Count > 0)
                 {
                     xmlTextWriter.WriteStartElement("Visitas");
-                    //xmlTextWriter.WriteElementString("visitas", ds.Tables[9].Rows[0]["RecibeVisitas"].ToString());
-                    //xmlTextWriter.WriteElementString("visitantes", ds.Tables[9].Rows[0]["Madre"].ToString());
-                    //xmlTextWriter.WriteElementString("periocidad", ds.Tables[9].Rows[0]["Periodicidad"].ToString());
-                    //xmlTextWriter.WriteElementString("salidas", ds.Tables[9].Rows[0]["SalidasPernoctacion"].ToString());
-                    //xmlTextWriter.WriteElementString("acompanantes", ds.Tables[9].Rows[0]["Acompañante"].ToString());
-                    xmlTextWriter.WriteElementString("PadreMadreTutor",ds.Tables[9].Rows[0]["PadreMadreTutor"].ToString());
+                    xmlTextWriter.WriteElementString("PadreMadreTutor", ds.Tables[9].Rows[0]["PadreMadreTutor"].ToString());
                     xmlTextWriter.WriteElementString("Otro", ds.Tables[9].Rows[0]["Otro"].ToString());
                     xmlTextWriter.WriteElementString("Padre", ds.Tables[9].Rows[0]["Padre"].ToString());
                     xmlTextWriter.WriteElementString("OtroMasculino", ds.Tables[9].Rows[0]["OtroMasculino"].ToString());
@@ -277,69 +274,93 @@ namespace WS_SENAME
                 if (ds.Tables[10].Rows.Count > 0)
                 {
                     xmlTextWriter.WriteStartElement("ProcesodeIntervencion");
-                    xmlTextWriter.WriteElementString("EVAL_Diagnos", ds.Tables[10].Rows[0]["EVAL_Diagnos"].ToString());
-                    xmlTextWriter.WriteElementString("CON_Diagnos", ds.Tables[10].Rows[0]["CON_Diagnos"].ToString());
-                    xmlTextWriter.WriteElementString("ENFOQUE_Plan", ds.Tables[10].Rows[0]["ENFOQUE_Plan"].ToString());
-                    xmlTextWriter.WriteElementString("FEC_Ultimo", ds.Tables[10].Rows[0]["FEC_Ultimo"].ToString());
+                    xmlTextWriter.WriteElementString("EVAL_Diagnos", ds.Tables[10].Rows[0] ["EVAL_Diagnos"].ToString());
+                    xmlTextWriter.WriteElementString("CON_Diagnos", ds.Tables[10].Rows[0]  ["CON_Diagnos"].ToString());
+                    xmlTextWriter.WriteElementString("ENFOQUE_Plan", ds.Tables[10].Rows[0] ["ENFOQUE_Plan"].ToString());
+                    xmlTextWriter.WriteElementString("FEC_Ultimo", ds.Tables[10].Rows[0]   ["FEC_Ultimo"].ToString());
                     xmlTextWriter.WriteElementString("POSIBIL_Resti", ds.Tables[10].Rows[0]["POSIBIL_Resti"].ToString());
-                    xmlTextWriter.WriteElementString("RES_Inform", ds.Tables[10].Rows[0]["RES_Inform"].ToString());
-                    xmlTextWriter.WriteElementString("TIP_Interv", ds.Tables[10].Rows[0]["TIP_Interv"].ToString());
-                    xmlTextWriter.WriteElementString("INST_Interv", ds.Tables[10].Rows[0]["INST_Interv"].ToString());
-                    xmlTextWriter.WriteElementString("LIST_Amb", ds.Tables[10].Rows[0]["LIST_Amb"].ToString());
-                    xmlTextWriter.WriteElementString("FLG_Mal_Res", ds.Tables[10].Rows[0]["FLG_Mal_Res"].ToString());
-                    xmlTextWriter.WriteStartElement("MALTRATO");
-                    for (var index = 0; index < ds.Tables[11].Rows.Count; ++index)
-                        xmlTextWriter.WriteElementString("NUM_Tip_Mal", ds.Tables[11].Rows[index]["NUM_Tip_Mal"].ToString());
-                    xmlTextWriter.WriteEndElement();
-                    xmlTextWriter.WriteStartElement("PARTICIPACION");
-                    for (var index = 0; index < ds.Tables[12].Rows.Count; ++index)
-                        xmlTextWriter.WriteElementString("NUM_For_Par", ds.Tables[12].Rows[index]["NUM_For_Par"].ToString());
-                    xmlTextWriter.WriteEndElement();
-                    xmlTextWriter.WriteElementString("FLG_Inftribunal", ds.Tables[10].Rows[0]["FLG_Inftribunal"].ToString());
-                    xmlTextWriter.WriteElementString("FLG_Medidas", ds.Tables[10].Rows[0]["FLG_Medidas"].ToString());
-                    xmlTextWriter.WriteElementString("GLS_Cualesmed", ds.Tables[10].Rows[0]["GLS_Cualesmed"].ToString());
-                    xmlTextWriter.WriteElementString("PLAZO_Pregreso", ds.Tables[10].Rows[0]["PLAZO_Pregreso"].ToString());
-                    xmlTextWriter.WriteElementString("PLAZO_ACERCAMIENTO_DESCRIPCION", ds.Tables[10].Rows[0]["PLAZO_ACERCAMIENTO_DESCRIPCION"].ToString());
-                    xmlTextWriter.WriteElementString("FEC_Pregreso", ds.Tables[10].Rows[0]["FEC_Pregreso"].ToString());
-                    xmlTextWriter.WriteElementString("PLAN_INTERVENCION", ds.Tables[10].Rows[0]["PLAN_INTERVENCION"].ToString());
-                    xmlTextWriter.WriteElementString("INTesp", ds.Tables[10].Rows[0]["INTesp"].ToString());
-                    xmlTextWriter.WriteElementString("PRE_egreso", ds.Tables[10].Rows[0]["PRE_egreso"].ToString());
-                    xmlTextWriter.WriteElementString("TIP_Resolucion", ds.Tables[10].Rows[0]["TIP_Resolucion"].ToString());
-                    xmlTextWriter.WriteElementString("OBSERV_Egreso", ds.Tables[10].Rows[0]["OBSERV_Egreso"].ToString());
+                    xmlTextWriter.WriteElementString("RES_Inform", ds.Tables[10].Rows[0]   ["RES_Inform"].ToString());
                     xmlTextWriter.WriteEndElement();
                 }
-                else
+               
+
+                xmlTextWriter.WriteStartElement("PARTICIPACION");
+
+                xmlTextWriter.WriteStartElement("involucrados y detalle de los antecedentes");
+
+                if (ds.Tables[11].Rows.Count > 0)
                 {
-                    xmlTextWriter.WriteStartElement("ProcesodeIntervencion");
-                    xmlTextWriter.WriteElementString("EVAL_Diagnos", "");
-                    xmlTextWriter.WriteElementString("CON_Diagnos", "");
-                    xmlTextWriter.WriteElementString("ENFOQUE_Plan", "");
-                    xmlTextWriter.WriteElementString("FEC_Ultimo", "");
-                    xmlTextWriter.WriteElementString("POSIBIL_Resti", "");
-                    xmlTextWriter.WriteElementString("RES_Inform", "");
-                    xmlTextWriter.WriteElementString("TIP_Interv", "");
-                    xmlTextWriter.WriteElementString("INST_Interv", "");
-                    xmlTextWriter.WriteElementString("LIST_Amb", "");
-                    xmlTextWriter.WriteElementString("FLG_Mal_Res", "");
-                    xmlTextWriter.WriteStartElement("MALTRATO");
-                    xmlTextWriter.WriteElementString("NUM_Tip_Mal", "");
-                    xmlTextWriter.WriteEndElement();
-                    xmlTextWriter.WriteStartElement("PARTICIPACION");
-                    xmlTextWriter.WriteElementString("NUM_Tip_Mal", "");
-                    xmlTextWriter.WriteEndElement();
-                    xmlTextWriter.WriteElementString("FLG_Inftribunal", "");
-                    xmlTextWriter.WriteElementString("FLG_Medidas", "");
-                    xmlTextWriter.WriteElementString("GLS_Cualesmed", "");
-                    xmlTextWriter.WriteElementString("PLAZO_Pregreso", "");
-                    xmlTextWriter.WriteElementString("PLAZO_ACERCAMIENTO_DESCRIPCION", "");
-                    xmlTextWriter.WriteElementString("FEC_Pregreso", "");
-                    xmlTextWriter.WriteElementString("PLAN_INTERVENCION", "");
-                    xmlTextWriter.WriteElementString("INTesp", "");
-                    xmlTextWriter.WriteElementString("PRE_egreso", "");
-                    xmlTextWriter.WriteElementString("TIP_Resolucion", "");
-                    xmlTextWriter.WriteElementString("OBSERV_Egreso", "");
-                    xmlTextWriter.WriteEndElement();
+                    for (var index = 0; index < ds.Tables[11].Rows.Count; ++index)
+                    {
+                        xmlTextWriter.WriteElementString("Numero_Caso", ds.Tables[11].Rows[0]["NumeroCaso"].ToString());
+                        xmlTextWriter.WriteElementString("IdAntecedente", ds.Tables[11].Rows[0]["IdAntecedente"].ToString());
+                        xmlTextWriter.WriteElementString("CodNino", ds.Tables[11].Rows[0]["CodNino"].ToString());
+                        xmlTextWriter.WriteElementString("CodCircular", ds.Tables[11].Rows[0]["CodCircular"].ToString());
+                        xmlTextWriter.WriteElementString("codproyecto", ds.Tables[11].Rows[0]["codproyecto"].ToString());
+                        xmlTextWriter.WriteElementString("Nombre", ds.Tables[11].Rows[0]["nombre"].ToString());
+                        xmlTextWriter.WriteElementString("LugarHecho", ds.Tables[11].Rows[0]["LugarHecho"].ToString());
+                        xmlTextWriter.WriteElementString("TipoVulneracion", ds.Tables[11].Rows[0]["TipoVulneracion"].ToString());
+                        xmlTextWriter.WriteElementString("IdInvolucrado", ds.Tables[11].Rows[0]["IdInvolucrado"].ToString());
+                        xmlTextWriter.WriteElementString("Tipo_Involucrado", ds.Tables[11].Rows[0]["Tipo Involucrado"].ToString());
+                        xmlTextWriter.WriteEndElement();
+                    }
                 }
+                //xmlTextWriter.WriteElementString("TIP_Interv", ds.Tables[10].Rows[0]   ["TIP_Interv"].ToString());
+                //xmlTextWriter.WriteElementString("INST_Interv", ds.Tables[10].Rows[0]  ["INST_Interv"].ToString());
+                //xmlTextWriter.WriteElementString("LIST_Amb", ds.Tables[10].Rows[0]     ["LIST_Amb"].ToString());
+                //xmlTextWriter.WriteElementString("FLG_Mal_Res", ds.Tables[10].Rows[0]  ["FLG_Mal_Res"].ToString());
+                //xmlTextWriter.WriteStartElement("MALTRATO");
+                //for (var index = 0; index < ds.Tables[11].Rows.Count; ++index)
+                //    xmlTextWriter.WriteElementString("NUM_Tip_Mal", ds.Tables[11].Rows[index]["NUM_Tip_Mal"].ToString());
+                //for (var index = 0; index < ds.Tables[12].Rows.Count; ++index)
+                //    xmlTextWriter.WriteElementString("NUM_For_Par", ds.Tables[12].Rows[index]["NUM_For_Par"].ToString());
+
+                //xmlTextWriter.WriteEndElement();
+                //xmlTextWriter.WriteElementString("FLG_Inftribunal", ds.Tables[10].Rows[0]               ["FLG_Inftribunal"].ToString());
+                //xmlTextWriter.WriteElementString("FLG_Medidas", ds.Tables[10].Rows[0]                   ["FLG_Medidas"].ToString());
+                //xmlTextWriter.WriteElementString("GLS_Cualesmed", ds.Tables[10].Rows[0]                 ["GLS_Cualesmed"].ToString());
+                //xmlTextWriter.WriteElementString("PLAZO_Pregreso", ds.Tables[10].Rows[0]                ["PLAZO_Pregreso"].ToString());
+                //xmlTextWriter.WriteElementString("PLAZO_ACERCAMIENTO_DESCRIPCION", ds.Tables[10].Rows[0]["PLAZO_ACERCAMIENTO_DESCRIPCION"].ToString());
+                //xmlTextWriter.WriteElementString("FEC_Pregreso", ds.Tables[10].Rows[0]                  ["FEC_Pregreso"].ToString());
+                //xmlTextWriter.WriteElementString("PLAN_INTERVENCION", ds.Tables[10].Rows[0]             ["PLAN_INTERVENCION"].ToString());
+                //xmlTextWriter.WriteElementString("INTesp", ds.Tables[10].Rows[0]                        ["INTesp"].ToString());
+                //xmlTextWriter.WriteElementString("PRE_egreso", ds.Tables[10].Rows[0]                    ["PRE_egreso"].ToString());
+                //xmlTextWriter.WriteElementString("TIP_Resolucion", ds.Tables[10].Rows[0]                ["TIP_Resolucion"].ToString());
+                //xmlTextWriter.WriteElementString("OBSERV_Egreso", ds.Tables[10].Rows[0]                 ["OBSERV_Egreso"].ToString());
+                //xmlTextWriter.WriteEndElement();
+
+                //else
+                //{
+                //    xmlTextWriter.WriteStartElement("ProcesodeIntervencion");
+                //    xmlTextWriter.WriteElementString("EVAL_Diagnos", "");
+                //    xmlTextWriter.WriteElementString("CON_Diagnos", "");
+                //    xmlTextWriter.WriteElementString("ENFOQUE_Plan", "");
+                //    xmlTextWriter.WriteElementString("FEC_Ultimo", "");
+                //    xmlTextWriter.WriteElementString("POSIBIL_Resti", "");
+                //    xmlTextWriter.WriteElementString("RES_Inform", "");
+                //    xmlTextWriter.WriteElementString("TIP_Interv", "");
+                //    xmlTextWriter.WriteElementString("INST_Interv", "");
+                //    xmlTextWriter.WriteElementString("LIST_Amb", "");
+                //    xmlTextWriter.WriteElementString("FLG_Mal_Res", "");
+                //    xmlTextWriter.WriteStartElement("MALTRATO");
+                //    xmlTextWriter.WriteElementString("NUM_Tip_Mal", "");
+                //    xmlTextWriter.WriteEndElement();
+                //    xmlTextWriter.WriteStartElement("PARTICIPACION");
+                //    xmlTextWriter.WriteElementString("NUM_Tip_Mal", "");
+                //    xmlTextWriter.WriteEndElement();
+                //    xmlTextWriter.WriteElementString("FLG_Inftribunal", "");
+                //    xmlTextWriter.WriteElementString("FLG_Medidas", "");
+                //    xmlTextWriter.WriteElementString("GLS_Cualesmed", "");
+                //    xmlTextWriter.WriteElementString("PLAZO_Pregreso", "");
+                //    xmlTextWriter.WriteElementString("PLAZO_ACERCAMIENTO_DESCRIPCION", "");
+                //    xmlTextWriter.WriteElementString("FEC_Pregreso", "");
+                //    xmlTextWriter.WriteElementString("PLAN_INTERVENCION", "");
+                //    xmlTextWriter.WriteElementString("INTesp", "");
+                //    xmlTextWriter.WriteElementString("PRE_egreso", "");
+                //    xmlTextWriter.WriteElementString("TIP_Resolucion", "");
+                //    xmlTextWriter.WriteElementString("OBSERV_Egreso", "");
+                //    xmlTextWriter.WriteEndElement();
+                //}
                 xmlTextWriter.WriteEndElement();
                 xmlTextWriter.Flush();
                 xmlTextWriter.Close();
@@ -355,63 +376,6 @@ namespace WS_SENAME
             xmlTextWriter.Close();
             xmlDocument.Load(str2);
             File.Delete(str2);
-            return xmlDocument;
-        }
-
-        [WebMethod(Description = "Devuelve la ultima Ficha Residencial registrada al ingresar un codigo de proyecto vigente")]
-        public XmlDocument GetFichaResidencialXML(string codProyecto)
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            Regex regex = new Regex("^\\d+$");
-            try
-            {
-                if (regex.Match(codProyecto).Success)
-                    xmlDocument = new FichaResidencialMasivoDao().ObtenerDatosFichaResidencialXML(int.Parse(codProyecto));
-                else
-                    xmlDocument.LoadXml("<FICHA_RESIDENCIAL><ESTATUS><CODIGO>4</CODIGO><GLOSA>VALOR DE PARÁMETRO NO ESTÁ DENTRO DEL DOMINIO DE VALORES PERMITIDOS (ENTEROS).</GLOSA></ESTATUS></FICHA_RESIDENCIAL>");
-            }
-            catch (Exception ex)
-            {
-                xmlDocument.LoadXml("<FICHA_RESIDENCIAL><ESTATUS><CODIGO>4</CODIGO><GLOSA>" + ex.Message + "</GLOSA></ESTATUS></FICHA_RESIDENCIAL>");
-            }
-            return xmlDocument;
-        }
-
-        [WebMethod(Description = "Devuelve la ultima Ficha Residencial con Observaciones (PJUD) y/o Respuestas (SENAME)")]
-        public XmlDocument FichaResidencial_ObservacionesRespuestasXML(string codProyecto)
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            Regex regex = new Regex("^\\d+$");
-            try
-            {
-                if (regex.Match(codProyecto).Success)
-                    xmlDocument = new FichaResidencialMasivoDao().ObtenerDatosObservacionesFichaXML(int.Parse(codProyecto));
-                else
-                    xmlDocument.LoadXml("<OBSERVACIONES_FICHA_RESIDENCIAL><ESTATUS><CODIGO>5</CODIGO><GLOSA>VALOR DE PARÁMETRO NO ESTÁ DENTRO DEL DOMINIO DE VALORES PERMITIDOS (ENTEROS).</GLOSA></ESTATUS></OBSERVACIONES_FICHA_RESIDENCIAL>");
-            }
-            catch (Exception ex)
-            {
-                xmlDocument.LoadXml("<OBSERVACIONES_FICHA_RESIDENCIAL><ESTATUS><CODIGO>5</CODIGO><GLOSA>" + ex.Message + "</GLOSA></ESTATUS></OBSERVACIONES_FICHA_RESIDENCIAL>");
-            }
-            return xmlDocument;
-        }
-
-        [WebMethod(Description = "Al ingresar un codigo de proyecto indica si esta vigente. Si se ingresa 0 devuelve un listado de todos los proyectos vigentes por residencias")]
-        public XmlDocument ProyectosVigentesResidenciasXML(string codProyecto)
-        {
-            var xmlDocument = new XmlDocument();
-            var regex = new Regex("^\\d+$");
-            try
-            {
-                if (regex.Match(codProyecto).Success)
-                    xmlDocument = new FichaResidencialMasivoDao().ObtenerDatosProyectoXML(int.Parse(codProyecto));
-                else
-                    xmlDocument.LoadXml("<PROYECTOS_VIGENTE><ESTATUS><CODIGO>4</CODIGO><GLOSA>VALOR DE PARÁMETRO NO ESTÁ DENTRO DEL DOMINIO DE VALORES PERMITIDOS (ENTEROS).</GLOSA></ESTATUS></PROYECTOS_VIGENTE>");
-            }
-            catch (Exception ex)
-            {
-                xmlDocument.LoadXml("<PROYECTOS_VIGENTE><ESTATUS><CODIGO>4</CODIGO><GLOSA>" + ex.Message.ToUpper() + "</GLOSA></ESTATUS></PROYECTOS_VIGENTE>");
-            }
             return xmlDocument;
         }
 
