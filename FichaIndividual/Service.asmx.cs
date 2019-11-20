@@ -46,22 +46,6 @@ namespace WS_SENAME
             return this.GetNinoFichaIndividual(sqlConnection, dataTable);
         }
 
-        //[WebMethod(Description = "Ficha Individual TEST. Información con relación a la situación de los niño niña o adolescente asociada a su estadía en un Centro Residencial o Familia de Acogida.")]
-        //public XmlDocument FichaIndividual_xml_TEST(int RUN, string DV)
-        //{
-        //    string connectionString = ConfigurationManager.ConnectionStrings["Conexiones"].ConnectionString;
-        //    SqlConnection sqlConnection = new SqlConnection();
-        //    sqlConnection.ConnectionString = connectionString;
-        //    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(string.Empty + "SELECT top 1 Nombres, Apellido_Paterno, Apellido_Materno, Rut, dbo.f_rectificacion_cambia_fecha_str(FechaNacimiento) as FechaNacimiento, DATEDIFF(yyyy, FechaNacimiento, GETDATE()) as Edad, Sexo, CodNino, CodNacionalidad, (Select Descripcion from parNacionalidades pn where pn.CodNacionalidad = n.CodNacionalidad) as Nacionalidad FROM Ninos n " + "WHERE Rut = '" + RUN.ToString().Trim() + "-" + DV.Trim() + "' " + "order by CodNino desc", sqlConnection);
-        //    DataTable dtNino = new DataTable();
-        //    DataTable dataTable = dtNino;
-        //    sqlDataAdapter.Fill(dataTable);
-        //    XmlDocument xmlDocument = new XmlDocument();
-        //    XmlDocument fichaIndividualTest = this.GetNinoFichaIndividual_TEST(sqlConnection, dtNino);
-        //    sqlConnection.Close();
-        //    return fichaIndividualTest;
-        //}
-
         [WebMethod(Description = "Información del Proyecto")]
         public XmlDocument InformacionProyecto_xml(int CodProyecto)
         {
