@@ -80,6 +80,7 @@ namespace WS_SENAME
                 return xmlDocument;
             }
 
+
             var connectionString = ConfigurationManager.ConnectionStrings["Conexiones"].ConnectionString;
             var ds = new DataSet();
 
