@@ -1,5 +1,4 @@
-﻿using SENAME.Senainfo.ModFichaResidencial.DAL.DAO;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
@@ -79,8 +78,6 @@ namespace WS_SENAME
                 File.Delete(str2);
                 return xmlDocument;
             }
-
-
             var connectionString = ConfigurationManager.ConnectionStrings["Conexiones"].ConnectionString;
             var ds = new DataSet();
 
@@ -131,7 +128,9 @@ namespace WS_SENAME
                     xmlTextWriter.WriteElementString("FechaEgreso", ds.Tables[1].Rows[0]["FechaEgreso"].ToString());
                     xmlTextWriter.WriteEndElement();
                 }
+
                 xmlTextWriter.WriteStartElement("AntecedentesdeSalud");
+
                 if (ds.Tables[2].Rows.Count > 0)
                 {
                     for (var index = 0; index < ds.Tables[2].Rows.Count; ++index)
@@ -143,6 +142,7 @@ namespace WS_SENAME
                         xmlTextWriter.WriteEndElement();
                     }
                 }
+
                 if (ds.Tables[3].Rows.Count > 0)
                 {
                     for (var index = 0; index < ds.Tables[3].Rows.Count; ++index)
@@ -157,6 +157,7 @@ namespace WS_SENAME
                         xmlTextWriter.WriteEndElement();
                     }
                 }
+
                 if (ds.Tables[4].Rows.Count > 0)
                 {
                     for (var index = 0; index < ds.Tables[4].Rows.Count; ++index)
@@ -187,6 +188,7 @@ namespace WS_SENAME
                     }
                 }
                 xmlTextWriter.WriteEndElement();
+
                 if (ds.Tables[6].Rows.Count > 0)
                 {
                     xmlTextWriter.WriteStartElement("AntecedentesEscolaridad");
@@ -235,6 +237,7 @@ namespace WS_SENAME
                     }
                     xmlTextWriter.WriteEndElement();
                 }
+
                 if (ds.Tables[8].Rows.Count > 0)
                 {
                     xmlTextWriter.WriteStartElement("SituacionFamiliar");
@@ -265,6 +268,7 @@ namespace WS_SENAME
                     xmlTextWriter.WriteElementString("OtroExtensaFemenino", ds.Tables[9].Rows[0]["OtroExtensaFemenino"].ToString());
                     xmlTextWriter.WriteEndElement();
                 }
+
                 if (ds.Tables[10].Rows.Count > 0)
                 {
                     xmlTextWriter.WriteStartElement("ProcesodeIntervencion");
