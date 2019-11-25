@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FichaIndividual", "FichaIndividual\FichaIndividual.csproj", "{B5F005E1-8917-4B1E-84BB-EDADD554124E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSFichaIndividual", "FichaIndividual\WSFichaIndividual.csproj", "{B5F005E1-8917-4B1E-84BB-EDADD554124E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
