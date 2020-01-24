@@ -83,7 +83,7 @@ namespace WS_SENAME
 
             using (var con = new SqlConnection(connectionString))
             {
-                var cmd = new SqlCommand("WebServices_GetFichaIndividual_RM", con)
+                var cmd = new SqlCommand("[dbo].[WebServices_GetFichaIndividual_CG]", con)
                 {
                     CommandTimeout = 10000000,
                     CommandType = CommandType.StoredProcedure
@@ -191,29 +191,38 @@ namespace WS_SENAME
 
                 if (ds.Tables[6].Rows.Count > 0)
                 {
+                    // 23/01/2020 Social-it: Juan Carlos Peña V. Se adapta al nuevo procedimiento almacenado
+                    // WebServices_GetFichaIndividual_CG
                     xmlTextWriter.WriteStartElement("AntecedentesEscolaridad");
-                    xmlTextWriter.WriteElementString("Periodo",              ds.Tables[6].Rows[0]["Periodo"].ToString());
-                    xmlTextWriter.WriteElementString("Rut",                  ds.Tables[6].Rows[0]["Rut"].ToString());
-                    xmlTextWriter.WriteElementString("Curso_Nivel",          ds.Tables[6].Rows[0]["Curso_Nivel"].ToString());
-                    xmlTextWriter.WriteElementString("Letra",                ds.Tables[6].Rows[0]["Letra"].ToString());
-                    xmlTextWriter.WriteElementString("RDB",                  ds.Tables[6].Rows[0]["RDB"].ToString());
-                    xmlTextWriter.WriteElementString("Nombre_Escuela",       ds.Tables[6].Rows[0]["Nombre_Escuela"].ToString());
-                    xmlTextWriter.WriteElementString("NombreComuna",         ds.Tables[6].Rows[0]["NombreComuna"].ToString());
-                    xmlTextWriter.WriteElementString("Jornada",              ds.Tables[6].Rows[0]["Jornada"].ToString());
-                    xmlTextWriter.WriteElementString("Situacion_Estudio",    ds.Tables[6].Rows[0]["Situacion_Estudio"].ToString());
-                    xmlTextWriter.WriteElementString("Estado_Escolar",       ds.Tables[6].Rows[0]["Estado_Escolar"].ToString());
-                    xmlTextWriter.WriteElementString("Enseñanza",            ds.Tables[6].Rows[0]["Enseñanza"].ToString());
-                    xmlTextWriter.WriteElementString("Educ_Especial",        ds.Tables[6].Rows[0]["Educ_Especial"].ToString());
-                    xmlTextWriter.WriteElementString("MarzoAsistencia",      ds.Tables[6].Rows[0]["MarzoAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("AbrilAsistencia",      ds.Tables[6].Rows[0]["AbrilAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("MayoAsistencia",       ds.Tables[6].Rows[0]["MayoAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("JunioAsistencia",      ds.Tables[6].Rows[0]["JunioAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("JulioAsistencia",      ds.Tables[6].Rows[0]["JulioAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("AgostoAsistencia",     ds.Tables[6].Rows[0]["AgostoAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("SeptiembreAsistencia", ds.Tables[6].Rows[0]["SeptiembreAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("OctubreAsistencia",    ds.Tables[6].Rows[0]["OctubreAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("NoviembreAsistencia",  ds.Tables[6].Rows[0]["NoviembreAsistencia"].ToString());
-                    xmlTextWriter.WriteElementString("DiciembreAsistencia",  ds.Tables[6].Rows[0]["DiciembreAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("Periodo",                 ds.Tables[6].Rows[0]["AñoActual"].ToString());
+                    //xmlTextWriter.WriteElementString("Rut",                  ds.Tables[6].Rows[0]["Rut"].ToString());
+                    xmlTextWriter.WriteElementString("CursoActual",             ds.Tables[6].Rows[0]["DescripcionCursoActual"].ToString());
+                    xmlTextWriter.WriteElementString("RDB",                     ds.Tables[6].Rows[0]["CodRBD"].ToString());
+                    //xmlTextWriter.WriteElementString("Nombre_Escuela",       ds.Tables[6].Rows[0]["Nombre_Escuela"].ToString());
+                    //xmlTextWriter.WriteElementString("NombreComuna",         ds.Tables[6].Rows[0]["NombreComuna"].ToString());
+                    //xmlTextWriter.WriteElementString("Jornada",              ds.Tables[6].Rows[0]["Jornada"].ToString());
+                    xmlTextWriter.WriteElementString("Situacion_Estudio",       ds.Tables[6].Rows[0]["Desc_Situacion"].ToString());
+                    //xmlTextWriter.WriteElementString("Estado_Escolar",       ds.Tables[6].Rows[0]["Estado_Escolar"].ToString());
+                    //xmlTextWriter.WriteElementString("Enseñanza",            ds.Tables[6].Rows[0]["Enseñanza"].ToString());
+                    //xmlTextWriter.WriteElementString("Educ_Especial",        ds.Tables[6].Rows[0]["Educ_Especial"].ToString());
+                    xmlTextWriter.WriteElementString("UltimoCursoAprobado",     ds.Tables[6].Rows[0]["DescripcionUltimoCursoAprobado"].ToString());
+                    xmlTextWriter.WriteElementString("AñoUltimoCursoAprobado",  ds.Tables[6].Rows[0]["AnoUltimoCursoAprobado"].ToString());
+                    xmlTextWriter.WriteElementString("RazonInasistencia",       ds.Tables[6].Rows[0]["RazonInacistencia"].ToString());
+                    xmlTextWriter.WriteElementString("PresentaRetraso",         ds.Tables[6].Rows[0]["PresentaRetraso"].ToString());
+                    xmlTextWriter.WriteElementString("NivelDiferencial",        ds.Tables[6].Rows[0]["NivelDiferencial"].ToString());
+                    xmlTextWriter.WriteElementString("Observacion",             ds.Tables[6].Rows[0]["Observacion"].ToString());
+                    xmlTextWriter.WriteElementString("EneroAsistencia",         ds.Tables[6].Rows[0]["EneroAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("FebreroAsistencia",       ds.Tables[6].Rows[0]["FebreroAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("MarzoAsistencia",         ds.Tables[6].Rows[0]["MarzoAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("AbrilAsistencia",         ds.Tables[6].Rows[0]["AbrilAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("MayoAsistencia",          ds.Tables[6].Rows[0]["MayoAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("JunioAsistencia",         ds.Tables[6].Rows[0]["JunioAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("JulioAsistencia",         ds.Tables[6].Rows[0]["JulioAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("AgostoAsistencia",        ds.Tables[6].Rows[0]["AgostoAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("SeptiembreAsistencia",    ds.Tables[6].Rows[0]["SeptiembreAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("OctubreAsistencia",       ds.Tables[6].Rows[0]["OctubreAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("NoviembreAsistencia",     ds.Tables[6].Rows[0]["NoviembreAsistencia"].ToString());
+                    xmlTextWriter.WriteElementString("DiciembreAsistencia",     ds.Tables[6].Rows[0]["DiciembreAsistencia"].ToString());
                     xmlTextWriter.WriteEndElement();
                 }
 
@@ -252,21 +261,43 @@ namespace WS_SENAME
                     xmlTextWriter.WriteEndElement();
                 }
 
+                //if (ds.Tables[9].Rows.Count > 0)
+                //{
+                //    xmlTextWriter.WriteStartElement("Visitas");
+                //    xmlTextWriter.WriteElementString("PadreMadreTutor", ds.Tables[9].Rows[0]["PadreMadreTutor"].ToString());
+                //    xmlTextWriter.WriteElementString("Otro", ds.Tables[9].Rows[0]["Otro"].ToString());
+                //    xmlTextWriter.WriteElementString("Padre", ds.Tables[9].Rows[0]["Padre"].ToString());
+                //    xmlTextWriter.WriteElementString("OtroMasculino", ds.Tables[9].Rows[0]["OtroMasculino"].ToString());
+                //    xmlTextWriter.WriteElementString("Hermana", ds.Tables[9].Rows[0]["Hermana"].ToString());
+                //    xmlTextWriter.WriteElementString("Hermano", ds.Tables[9].Rows[0]["Hermano"].ToString());
+                //    xmlTextWriter.WriteElementString("SinVisitas", ds.Tables[9].Rows[0]["SinVisitas"].ToString());
+                //    xmlTextWriter.WriteElementString("RecibeVisitas", ds.Tables[9].Rows[0]["RecibeVisitas"].ToString());
+                //    xmlTextWriter.WriteElementString("SalidasPernoctacion", ds.Tables[9].Rows[0]["SalidasPernoctacion"].ToString());
+                //    xmlTextWriter.WriteElementString("OtroExtensaMasculino", ds.Tables[9].Rows[0]["OtroExtensaMasculino"].ToString());
+                //    xmlTextWriter.WriteElementString("OtroExtensaFemenino", ds.Tables[9].Rows[0]["OtroExtensaFemenino"].ToString());
+                //    xmlTextWriter.WriteEndElement();
+                //}
+
                 if (ds.Tables[9].Rows.Count > 0)
                 {
-                    xmlTextWriter.WriteStartElement("Visitas");
-                    xmlTextWriter.WriteElementString("PadreMadreTutor", ds.Tables[9].Rows[0]["PadreMadreTutor"].ToString());
-                    xmlTextWriter.WriteElementString("Otro", ds.Tables[9].Rows[0]["Otro"].ToString());
-                    xmlTextWriter.WriteElementString("Padre", ds.Tables[9].Rows[0]["Padre"].ToString());
-                    xmlTextWriter.WriteElementString("OtroMasculino", ds.Tables[9].Rows[0]["OtroMasculino"].ToString());
-                    xmlTextWriter.WriteElementString("Hermana", ds.Tables[9].Rows[0]["Hermana"].ToString());
-                    xmlTextWriter.WriteElementString("Hermano", ds.Tables[9].Rows[0]["Hermano"].ToString());
-                    xmlTextWriter.WriteElementString("SinVisitas", ds.Tables[9].Rows[0]["SinVisitas"].ToString());
-                    xmlTextWriter.WriteElementString("RecibeVisitas", ds.Tables[9].Rows[0]["RecibeVisitas"].ToString());
-                    xmlTextWriter.WriteElementString("SalidasPernoctacion", ds.Tables[9].Rows[0]["SalidasPernoctacion"].ToString());
-                    xmlTextWriter.WriteElementString("OtroExtensaMasculino", ds.Tables[9].Rows[0]["OtroExtensaMasculino"].ToString());
-                    xmlTextWriter.WriteElementString("OtroExtensaFemenino", ds.Tables[9].Rows[0]["OtroExtensaFemenino"].ToString());
-                    xmlTextWriter.WriteEndElement();
+                    for (var index = 0; index < ds.Tables[9].Rows.Count; ++index)
+                    {
+                        xmlTextWriter.WriteStartElement("Visitas");
+                        xmlTextWriter.WriteElementString("Periodo", ds.Tables[9].Rows[index]["Periodo"].ToString());
+                        xmlTextWriter.WriteElementString("FechaUltimaVisitaSalida", ds.Tables[9].Rows[index]["FechaUltVisita_Salida"].ToString());
+                        xmlTextWriter.WriteElementString("Madre", ds.Tables[9].Rows[index]["Madre"].ToString());
+                        xmlTextWriter.WriteElementString("Padre", ds.Tables[9].Rows[index]["Padre"].ToString());
+                        xmlTextWriter.WriteElementString("OtroMasculino", ds.Tables[9].Rows[index]["OtroMasculino"].ToString());
+                        xmlTextWriter.WriteElementString("Hermana", ds.Tables[9].Rows[index]["Hermana"].ToString());
+                        xmlTextWriter.WriteElementString("Hermano", ds.Tables[9].Rows[index]["Hermano"].ToString());
+                        xmlTextWriter.WriteElementString("Otro", ds.Tables[9].Rows[index]["Otro"].ToString());
+                        //xmlTextWriter.WriteElementString("SinVisitas", ds.Tables[9].Rows[index]["SinVisitas"].ToString());
+                        xmlTextWriter.WriteElementString("RecibeVisitas", ds.Tables[9].Rows[index]["RecibeVisitas"].ToString());
+                        xmlTextWriter.WriteElementString("SalidasPernoctacion", ds.Tables[9].Rows[index]["SalidasPernoctacion"].ToString());
+                        xmlTextWriter.WriteElementString("OtroExtensaMasculino", ds.Tables[9].Rows[index]["OtroExtensaMasculino"].ToString());
+                        xmlTextWriter.WriteElementString("OtroExtensaFemenino", ds.Tables[9].Rows[index]["OtroExtensaFemenino"].ToString());
+                        xmlTextWriter.WriteEndElement();
+                    }
                 }
 
                 if (ds.Tables[10].Rows.Count > 0)
@@ -290,12 +321,12 @@ namespace WS_SENAME
                         xmlTextWriter.WriteElementString("IdAntecedente",    ds.Tables[11].Rows[index]["IdAntecedente"].ToString());
                         xmlTextWriter.WriteElementString("CodNino",          ds.Tables[11].Rows[index]["CodNino"].ToString());
                         xmlTextWriter.WriteElementString("CodCircular",      ds.Tables[11].Rows[index]["CodCircular"].ToString());
-                        xmlTextWriter.WriteElementString("codproyecto",      ds.Tables[11].Rows[index]["codproyecto"].ToString());
-                        xmlTextWriter.WriteElementString("Nombre",           ds.Tables[11].Rows[index]["nombre"].ToString());
-                        xmlTextWriter.WriteElementString("LugarHecho",       ds.Tables[11].Rows[index]["LugarHecho"].ToString());
-                        xmlTextWriter.WriteElementString("TipoVulneracion",  ds.Tables[11].Rows[index]["TipoVulneracion"].ToString());
+                        xmlTextWriter.WriteElementString("codproyecto",      ds.Tables[11].Rows[index]["codProyecto"].ToString());
+                        xmlTextWriter.WriteElementString("Nombre",           ds.Tables[11].Rows[index]["NombProyecto"].ToString());
+                        xmlTextWriter.WriteElementString("LugarHecho",       ds.Tables[11].Rows[index]["NombLugarHecho"].ToString());
+                        xmlTextWriter.WriteElementString("TipoVulneracion",  ds.Tables[11].Rows[index]["DescTipoVulneracion"].ToString());
                         xmlTextWriter.WriteElementString("IdInvolucrado",    ds.Tables[11].Rows[index]["IdInvolucrado"].ToString());
-                        xmlTextWriter.WriteElementString("Tipo_Involucrado", ds.Tables[11].Rows[index]["Tipo Involucrado"].ToString());
+                        xmlTextWriter.WriteElementString("Tipo_Involucrado", ds.Tables[11].Rows[index]["DescTipoInvolucrado"].ToString());
                         xmlTextWriter.WriteEndElement();
                     }
                 }
@@ -307,8 +338,9 @@ namespace WS_SENAME
                         xmlTextWriter.WriteStartElement("Detalle_De_Los_Antecedentes_Victima");
                         xmlTextWriter.WriteElementString("NumeroCaso",           ds.Tables[12].Rows[index]["NumeroCaso"].ToString());
                         xmlTextWriter.WriteElementString("IdAntecedente",        ds.Tables[12].Rows[index]["IdAntecedente"].ToString());
-                        xmlTextWriter.WriteElementString("Tipo_Involucrado",     ds.Tables[12].Rows[index]["Tipo_Involucrado"].ToString());
-                        xmlTextWriter.WriteElementString("Tipo_Agresor",         ds.Tables[12].Rows[index]["Tipo_Agresor"].ToString());
+                        xmlTextWriter.WriteElementString("Tipo_Involucrado",     ds.Tables[12].Rows[index]["DescTipoInvolucrado"].ToString());
+                        xmlTextWriter.WriteElementString("Tipo_Agresor",         ds.Tables[12].Rows[index]["TipoAgresor"].ToString());
+                        xmlTextWriter.WriteElementString("Tipo_Relacion", ds.Tables[12].Rows[index]["TipoRelacion"].ToString());
                         xmlTextWriter.WriteElementString("CantidadInvolucrados", ds.Tables[12].Rows[index]["CantidadInvolucrados"].ToString());
                         xmlTextWriter.WriteEndElement();
                     }
